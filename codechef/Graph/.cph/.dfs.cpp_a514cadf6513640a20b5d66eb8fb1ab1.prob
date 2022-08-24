@@ -1,0 +1,1 @@
+{"name":"Local: dfs","url":"c:\\Users\\HP\\Desktop\\DSA\\codechef\\Graph\\dfs.cpp","tests":[{"id":1661360265358,"input":"10\n1 2\n1 3\n2 3\n2 4\n4 5\n5 6\n6 2\n7 6\n8 9\n9 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\HP\\Desktop\\DSA\\codechef\\Graph\\dfs.cpp","group":"local","local":true}
