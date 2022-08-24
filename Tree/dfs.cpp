@@ -56,40 +56,51 @@ return (a*b)/(gcd(a,b));
 
 //=======================
 
-void dfs(ll int root , vector<int> *vec , ll int parent){
-    cout<<root+1<<" ";
+void dfs(ll int root , vector<int> *vec , ll int parent , map<ll int , ll int> mp){
+    // cout<<root<<" ";       // <-----1 based indexing
+    mp[root] = mp[parent]++;
     for(auto i : vec[root]){
         if(i!=parent){
-            dfs(i, vec , root);
+            dfs(i, vec , root , mp);
         }
     }
 }
 
+
+
+
+
 void solve(){
     ll int n;
     cin>>n;
-    vector<int>*vec = new vector<int> [n];     // vector<int> vec[n];   
-    for(int i=0 ; i <n-1 ; i++){
+    vector<int>*vec = new vector<int> [n+1];     // vector<int> vec[n];   
+    for(int i=1 ; i <n ; i++){
         ll int a , b;
         cin>>a>>b;
-        vec[a-1].pb(b-1);
-        vec[b-1].pb(a-1);
+        vec[a].pb(b);
+        vec[b].pb(a);
        
 
     }
-    dfs(4, vec , -1);
+    map<ll int  , ll int> mp;
+    mp[-1]=0;
+    dfs(4, vec , -1  , mp);
+    ll int  u , v;
+    cin>>u>>v;
+    if(mp[u]<mp[v]){
+
+    }
+
+    // cout<<endl;
+    // dfs(3, vec , -1);
 }
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
 
-    int t = 1;
-    cin >> t;
-    while(t--) {
-     
-        solve();
-    }
+   solve();
+    
 
     return 0;
 }

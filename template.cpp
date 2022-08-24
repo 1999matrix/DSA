@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define gc getchar_unlocked
 #define fo(i,n) for(i=0;i<n;i++)
 #define Fo(i,k,n) for(i=k;k<n?i<n:i>n;k<n?i+=1:i-=1)
 #define ll long long
@@ -10,10 +9,8 @@ using namespace std;
 #define clr(x) memset(x, 0, sizeof(x))
 #define sortall(x) sort(all(x))
 #define PI 3.1415926535897932384626
-typedef pair<int, int>	pii;
-typedef vector<int>		vi;
-typedef vector<pii>		vpii;
-typedef vector<vi>		vvi;
+#define eb emplace_back
+#define pb push_back
 //=======================
 const int MOD = 1'000'000'007;
 const int N = 2e6+13, M = N;
@@ -21,6 +18,19 @@ const int N = 2e6+13, M = N;
 
 
 
+//=======================
+ 
+ 
+void dfs(ll int root , vector<int> *vec , ll int parent){
+cout<<root; 
+for(auto i : vec[root]){
+if(i!=parent){
+dfs(i, vec , root);
+}
+}
+}
+ 
+ 
 //=======================
 ll int power(ll int a , ll int n){
     ll int res = 1;
