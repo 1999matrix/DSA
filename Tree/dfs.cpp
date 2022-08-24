@@ -58,7 +58,7 @@ return (a*b)/(gcd(a,b));
 
 void dfs(ll int root , vector<int> *vec , ll int parent , map<ll int , ll int> mp){
     // cout<<root<<" ";       // <-----1 based indexing
-    mp[root] = mp[parent]++;
+    mp[root] = mp[parent]+1;
     for(auto i : vec[root]){
         if(i!=parent){
             dfs(i, vec , root , mp);
@@ -85,10 +85,8 @@ void solve(){
     map<ll int  , ll int> mp;
     mp[-1]=0;
     dfs(4, vec , -1  , mp);
-    ll int  u , v;
-    cin>>u>>v;
-    if(mp[u]<mp[v]){
-
+    for(auto m : mp){
+        cout<<m.first<< " "<<m.second<<endl;
     }
 
     // cout<<endl;
