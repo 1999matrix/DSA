@@ -13,23 +13,24 @@ using namespace std;
 #define pb push_back
 #define MOD 1000000007
 
-vector<pair<int , int>> vec[1007];
+vector<pair<int , int>> vec[10];
 
 
 int main(){
     ll int vertices , edges ;
     for(int i=0 ; i<edges ; i++){
         ll int a=0 , b=0 , weight=0;
-        cin>>a>>b>>weight;
+        cin>>a>>b;
+        cin>>weight;
         vec[a].pb({b , weight});
         vec[b].pb({a , weight});
     }
 
-// for(int i= 1 ; i<= vertices ; i++){
-//     for(auto child : vec[i]){
-//         cout<<child.first<<" "<<child.second<<endl;
-//     }
-// }
+for(int i= 1 ; i<= vertices ; i++){
+    for(int j =0 ; j < vec[i].size() ; j++){
+        cout<<vec[i][j].first<<" "<<vec[i][j].second<<endl;
+    }
+}
 
 
 
