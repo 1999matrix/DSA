@@ -9,24 +9,28 @@ using namespace std;
 bool vis[MAX];
 vector<int> edge[MAX];
 
-void dfs(ll int vertex , ll int parent){
+bool dfs(ll int vertex , ll int parent){
     
     
     // cout<<vertex<<" ";
     vis[vertex]=true;
-
+   bool isCycle=0;
     for(auto i : edge[vertex]){
        if(vis[i]){
-         if(i != parent) cout<<"cycle present from "<<vertex<<" to "<<i<<endl;
+        if(i == parent) return true;
+         else return false;
+        //  if(i != parent) cout<<"cycle present from "<<vertex<<" to "<<i<<endl;
        }
+      
        else{
       
-         dfs(i , vertex);
+        isCycle |= dfs(i , vertex);
        }
         
            
         
     }
+    return isCycle;
     
 }          
 
@@ -43,12 +47,14 @@ int main(){
     edge[b].pb(a);
     
 }  
+bool isCycle =0;
 for(int i=0  ; i< n ; i++ ){
     if(vis[i]) continue;
     else{
-        dfs(i,-1);
+       isCycle|= dfs(i,-1);
     }
 }
+cout<<isCycle<<endl;
 
 
 // dfs( 7 );            // how to get different connected components
