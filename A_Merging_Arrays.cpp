@@ -64,29 +64,59 @@ return (a*b)/(gcd(a,b));
 //=======================
 
 void solve(){
-    ll int n;
-    cin>>n;
-    ll int arr[n];
-    for(int i = 0 ; i < n  ; i++){ 
-        cin>>arr[i];
+    ll int n,m;
+    cin>>n>>m;
+    ll int a[n];
+    ll int b[m];
+    ll int c[n+m];
+    for(int i= 0 ; i< n ; i++){
+          cin>>a[i];
     }
-    sort(arr , arr+n);
-    ll int k= 0 ; 
-         cin>>k;
-         for(int i = 0 ; i < k ; i++){
-            ll int a , b;
-            cin>>a>>b;
-            cout<<upper_bound(arr , arr+n , b)- lower_bound(arr , arr+n , a)<<" ";
-         }
+    for(int i=0 ; i<m ; i++){
+        cin>>b[i];
+    }
+
+    ll int i=0 , j=0;
+    ll int k=0;
+    while(i<n && j < m){
+       if(a[i]<=b[j]) 
+       {
+        c[k]=a[i];
+        k++;
+        i++;
+       }
+       else{
+        c[k]= b[j];
+        k++;
+        j++;
+       }
+    }
+    if(i < n){
+        for(int x = i ; x<n ; x++){
+            c[k] = a[x];
+            k++;
+        }
+    }
+    else{
+         for(int x = j ; x<m ; x++){
+            c[k] = b[x];
+            k++;
+        }
+    }
+    for(int x = 0 ; x < n+m ; x++){
+        cout<<c[x]<<" ";
+    }
+
 }
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
 
-  
+   
      
         solve();
-   
+    
+
     return 0;
 }

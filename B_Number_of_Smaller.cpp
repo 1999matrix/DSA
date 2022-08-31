@@ -64,29 +64,53 @@ return (a*b)/(gcd(a,b));
 //=======================
 
 void solve(){
-    ll int n;
-    cin>>n;
-    ll int arr[n];
-    for(int i = 0 ; i < n  ; i++){ 
-        cin>>arr[i];
+    ll int n,m;
+    cin>>n>>m;
+    ll int a[n];
+    ll int b[m];
+    vector<ll int> v(m);
+    // ll int c[n+m];
+    for(int i= 0 ; i< n ; i++){
+          cin>>a[i];
     }
-    sort(arr , arr+n);
-    ll int k= 0 ; 
-         cin>>k;
-         for(int i = 0 ; i < k ; i++){
-            ll int a , b;
-            cin>>a>>b;
-            cout<<upper_bound(arr , arr+n , b)- lower_bound(arr , arr+n , a)<<" ";
+    for(int i=0 ; i<m ; i++){
+        cin>>b[i];
+    }
+    ll int k = 0 ;
+    ll int count  =0 ;
+    ll int i = 0 , j=0;
+    while(j<m && i<n){
+         if(a[i]<b[j]){
+            count++;
+            i++;
          }
+         else{
+            v[k] = count;
+            j++;
+            k++;
+         }
+    }
+
+    if(j<m){
+        for(int y = k ; y<m ; y++){
+            v[y] = count;
+            // k++;
+        }
+    }
+
+    for(int x =0 ; x<m ; x++){
+        cout<<v[x]<<" ";
+    }
 }
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
 
-  
+   
      
         solve();
-   
+    
+
     return 0;
 }

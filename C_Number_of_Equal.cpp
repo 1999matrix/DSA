@@ -64,29 +64,72 @@ return (a*b)/(gcd(a,b));
 //=======================
 
 void solve(){
-    ll int n;
-    cin>>n;
-    ll int arr[n];
-    for(int i = 0 ; i < n  ; i++){ 
-        cin>>arr[i];
+    
+    ll int n,m;
+    cin>>n>>m;
+    // deb2(n,m);
+    ll int a[n];
+    ll int b[m];
+    // vector<ll int> v(m);
+    // ll int c[n+m];
+    for(int x= 0 ; x< n ; x++){
+          cin>>a[x];
     }
-    sort(arr , arr+n);
-    ll int k= 0 ; 
-         cin>>k;
-         for(int i = 0 ; i < k ; i++){
-            ll int a , b;
-            cin>>a>>b;
-            cout<<upper_bound(arr , arr+n , b)- lower_bound(arr , arr+n , a)<<" ";
-         }
+    for(int x=0 ; x<m ; x++){
+        cin>>b[x];
+    }
+   
+    ll int i=0 , j=0 , count=0;
+      ll int prev_count=0;
+      stack<int> st;
+      st.push(0);
+
+      while(i<n && j<m){
+
+        if(j-1>=0 && b[j]==b[j-1]){
+          count+=st.top();
+            //  deb(prev_count);
+            //   deb(count);
+          j++;
+          continue;
+
+        }
+         prev_count=0;
+     if(a[i]<b[j]){
+        i++;
+        goto fend;
+     }
+     while(a[i]==b[j]){
+        prev_count++;
+        count++;
+        i++;
+        st.push(prev_count);
+
+      if(a[i]!=b[j]) {
+        goto fend;
+      }   
+     }
+    //  deb(count);
+    
+     if(a[i]>b[j]){
+        j++;
+        //  goto fend;
+     }
+     fend : 
+     ll int v=0;
+      }
+
+      cout<<count<<endl;
 }
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
 
-  
+    
      
         solve();
-   
+    
+
     return 0;
 }
