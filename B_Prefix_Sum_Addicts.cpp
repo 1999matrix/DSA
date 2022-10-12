@@ -9,6 +9,7 @@ using namespace std;
 #define clr(x) memset(x, 0, sizeof(x))
 #define sortall(x) sort(all(x))
 #define PI 3.1415926535897932384626
+#define vi vector<ll int>
 #define eb emplace_back
 #define pb push_back
 //=======================
@@ -64,54 +65,40 @@ return (a*b)/(gcd(a,b));
 //=======================
 
 void solve(){
-    ll int n ;
-    cin>>n;
-     vector<ll int>  vec(n);
-     vector<ll int>  a;
-     vector<ll int>  b;
-     bool flag=true;
-     ll int x=0;
-     ll int sum=0;
-     ll int diff=0;
-     for(int i= 0 ; i < n ; i++){
+    ll int a,b;
+    cin>>a>>b;
+    vector<ll int> vec(b);
+    vector<ll int> c;
+    if(b==1) {
+        cout<<"YES"<<endl;
+    }
+    ll int diff=0;
+    
+    for(int i=0 ; i< b ; i++){
         cin>>vec[i];
-        if(vec[i]==0) x++;
-        sum+=vec[i];
+    }
+
+    for(int i=b-1 ; i>0; i--){
+     diff = vec[i]-vec[i-1];
+     c.pb(diff);
+    }
         
-        a.pb(sum);
-     }
-     if(x==vec.size()){
-        for(int i = 0 ; i< n ; i++){
-            cout<<vec[i]<<" ";
-        }
-        cout<<endl;
-        return;
-     }
-     ll int h=0;
-     ll int k=0;
-     for(int i=1 ; i<n ; i++){
-         h=a[i-1]+vec[i];
-         k=a[i-1]-vec[i];
-         if(h>=0 && k>=0 && h!=k){
-            flag=false;
-            break;
-         }
+    c.pb(vec[0]);
+    reverse(c.begin() , c.end());
 
-     }
-     
-     if(flag){
-        for(int i=0 ; i<n ; i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
-     }
-        else{
-            cout<<-1<<endl;
-        }
-     }
-     
-     
+    for(auto m : c){
+        cout<<m<<" ";
+    }
 
+    cout<<endl;
+    
+    vi d;
+    d=c;
+    sort(all(d));
+    if(c==d) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+    
+}
     
 
 int main() {

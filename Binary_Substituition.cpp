@@ -12,8 +12,10 @@ using namespace std;
 #define eb emplace_back
 #define pb push_back
 //=======================
-const int MOD = 1'000'000'007;
+const int p =100007;
+const int MOD = 998244353;
 const int N = 2e6+13, M = N;
+// ll int arr[p][2];
 //=======================
 
 
@@ -63,65 +65,56 @@ return (a*b)/(gcd(a,b));
 
 //=======================
 
-void solve(){
-    ll int n ;
-    cin>>n;
-     vector<ll int>  vec(n);
-     vector<ll int>  a;
-     vector<ll int>  b;
-     bool flag=true;
-     ll int x=0;
-     ll int sum=0;
-     ll int diff=0;
-     for(int i= 0 ; i < n ; i++){
-        cin>>vec[i];
-        if(vec[i]==0) x++;
-        sum+=vec[i];
-        
-        a.pb(sum);
-     }
-     if(x==vec.size()){
-        for(int i = 0 ; i< n ; i++){
-            cout<<vec[i]<<" ";
-        }
-        cout<<endl;
-        return;
-     }
-     ll int h=0;
-     ll int k=0;
-     for(int i=1 ; i<n ; i++){
-         h=a[i-1]+vec[i];
-         k=a[i-1]-vec[i];
-         if(h>=0 && k>=0 && h!=k){
-            flag=false;
-            break;
-         }
+void bigdaddy(){
+    string d;
+    cin>>d;
+    ll int n=d.length();
+    ll int res=0;
+    ll int arr[p][2];
+   arr[0][0]=1;
+   for(int i=0 ; i < n-1 ; i++){
+    if(d[i+1] != d[i]){
+      if(i==0) res = (res+2);
+      else res=(res+1);
+    }
+   }
+   if(res==0) res=1;
+   
+   for(int i=1; i < n ; i++){
+       res=0;
+      res += arr[i-1][0];
+      res = res%MOD;
+      res+=arr[i-1][1];
+      res = res%MOD;
+      arr[i][0] =res;
+      if(d[i] != d[i-1]){
+          arr[i][1] = arr[i-1][0];
 
-     }
-     
-     if(flag){
-        for(int i=0 ; i<n ; i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
-     }
-        else{
-            cout<<-1<<endl;
-        }
-     }
-     
-     
+      }
+      else{
+        arr[i][1] = 0;
+      }
 
+   }
+   res=0;
+   res+=arr[n-1][1];
+   res=res%MOD;
+   res+=arr[n-1][0];
+   res=res%MOD;
+   cout<<res<<endl;
+}
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
+   
+
 
     int t = 1;
     cin >> t;
     while(t--) {
      
-        solve();
+        bigdaddy();
     }
 
     return 0;

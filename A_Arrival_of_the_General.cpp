@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define fo(i,n) for(i=0;i<n;i++)
-#define Fo(i,k,n) for(i=k;k<n?i<n:i>n;k<n?i+=1:i-=1)
+#define fo(i,n) for(int i=0;i<n;i++)
+#define Fo(i,k,n) for(int i=k;k<n?i<n:i>n;k<n?i+=1:i-=1)
 #define ll long long
 #define deb(x) cout << #x << "=" << x << endl
 #define deb2(x, y) cout << #x << "=" << x << "," << #y << "=" << y << endl
@@ -64,65 +64,59 @@ return (a*b)/(gcd(a,b));
 //=======================
 
 void solve(){
-    ll int n ;
+    ll int n;
     cin>>n;
-     vector<ll int>  vec(n);
-     vector<ll int>  a;
-     vector<ll int>  b;
-     bool flag=true;
-     ll int x=0;
-     ll int sum=0;
-     ll int diff=0;
-     for(int i= 0 ; i < n ; i++){
-        cin>>vec[i];
-        if(vec[i]==0) x++;
-        sum+=vec[i];
-        
-        a.pb(sum);
-     }
-     if(x==vec.size()){
-        for(int i = 0 ; i< n ; i++){
-            cout<<vec[i]<<" ";
-        }
-        cout<<endl;
-        return;
-     }
-     ll int h=0;
-     ll int k=0;
-     for(int i=1 ; i<n ; i++){
-         h=a[i-1]+vec[i];
-         k=a[i-1]-vec[i];
-         if(h>=0 && k>=0 && h!=k){
-            flag=false;
-            break;
-         }
+    // if(n==2) {
+    //     cout<<1<<endl ;
+    //      return;
+    // }
+    map<ll int, priority_queue<int>> mp;
+    ll int arr[n];
+    ll int mni = 0;
+    ll int mai = 0;
+    fo(i, n){
+    cin>>arr[i];
 
-     }
-     
-     if(flag){
-        for(int i=0 ; i<n ; i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
-     }
-        else{
-            cout<<-1<<endl;
-        }
-     }
-     
-     
+    }
+    for(int i= 1 ; i < n ; i++){
+        if(arr[mni] >= arr[i]) mni=i;
+        if(arr[mai]<arr[i]) mai = i;
+    }
+    // ll int y=0;
+    // for(auto m : mp){
+    //   if(y==0){
+    //     mni = m.second.top();
+    //   }
+      
+    //   if(y==n-1){
+    //     while(m.second.size()>1){
+    //         m.second.pop();
+    //     }
+    //     mai= m.second.top();
+    //   }
+    //   y++;
+    // }
+//    cout<<mni<<" "<<mai<<endl;
+    if(mni<mai){
+        cout<<(n-(mni+1))+mai-1<<endl;
+    }
+    else{
+         cout<<(n-(mni+1))+mai<<endl;
+    }
 
+
+    
+
+}
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
 
-    int t = 1;
-    cin >> t;
-    while(t--) {
+   
      
         solve();
-    }
+    
 
     return 0;
 }

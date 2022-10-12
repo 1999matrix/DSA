@@ -30,7 +30,15 @@ dfs(i, vec , root);
 }
 }
  
- 
+ vector<ll int> fun(ll int n){
+    vector <ll int> b;
+    for(ll i=1;i*i<=n;i++){ 
+        if(n%i==0) {
+         vec.pb(i); if(n/i!=i) vec.pb(n/i);
+          }
+         }
+          return vec;
+          }
 //=======================
 ll int power(ll int a , ll int n){
     ll int res = 1;
@@ -64,54 +72,74 @@ return (a*b)/(gcd(a,b));
 //=======================
 
 void solve(){
-    ll int n ;
+    ll int n;
     cin>>n;
-     vector<ll int>  vec(n);
-     vector<ll int>  a;
-     vector<ll int>  b;
-     bool flag=true;
-     ll int x=0;
-     ll int sum=0;
-     ll int diff=0;
-     for(int i= 0 ; i < n ; i++){
-        cin>>vec[i];
-        if(vec[i]==0) x++;
-        sum+=vec[i];
-        
-        a.pb(sum);
-     }
-     if(x==vec.size()){
-        for(int i = 0 ; i< n ; i++){
-            cout<<vec[i]<<" ";
-        }
-        cout<<endl;
-        return;
-     }
-     ll int h=0;
-     ll int k=0;
-     for(int i=1 ; i<n ; i++){
-         h=a[i-1]+vec[i];
-         k=a[i-1]-vec[i];
-         if(h>=0 && k>=0 && h!=k){
-            flag=false;
-            break;
+    ll int res= n;
+    vector<ll int> a(n);
+    vector<ll int> vec;
+    ll int x=0;
+    for(int i=0 ; i< n ; i++){
+        cin>>a[i];
+    }
+
+    for(int i=0 ; i< n ; i++){
+        x+=a[i];
+    }
+    map<ll int , ll int> mp;
+    vector <ll int> b;
+
+    for(int i=1;i*i<=x;i++){ 
+        if(x%i==0) {
+         vec.pb(i); 
+         mp.insert({i,i});
+         if(x/i!=i){
+            vec.pb(n/i);
+            mp.insert({n/i,n/i});
+         } 
+          }
          }
+         for(int i=0 ; i<n ; i++){
+            b[i] = vec[i];
+         }
+    if(vec.size()<=2){
+        cout<<n<<endl;
+        return;
+    }
 
-     }
-     
-     if(flag){
-        for(int i=0 ; i<n ; i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
-     }
-        else{
-            cout<<-1<<endl;
-        }
-     }
-     
-     
 
+    for(int i=0 ; i < n ; i++){
+
+        ll int req = x/b[i];
+        bool b = false;
+
+        ll s = 0;
+        ll thick = 0;
+
+        ll mx = 0;
+
+        for (int i = 0; i < n; ++i)
+        {
+            s+=a[i];
+            thick++;
+
+            if(s==req){
+                mx = max(thick,mx);
+                s= 0;
+                thick=0;
+            }else if(s>req){
+                b=true;
+                break;
+            }
+        }
+
+        if(!b){
+            res = min(ans,mx);
+        }
+
+    }
+    cout<<ans<<endl;
+
+}
     
 
 int main() {

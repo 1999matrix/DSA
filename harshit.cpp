@@ -64,54 +64,23 @@ return (a*b)/(gcd(a,b));
 //=======================
 
 void solve(){
-    ll int n ;
-    cin>>n;
-     vector<ll int>  vec(n);
-     vector<ll int>  a;
-     vector<ll int>  b;
-     bool flag=true;
-     ll int x=0;
-     ll int sum=0;
-     ll int diff=0;
-     for(int i= 0 ; i < n ; i++){
-        cin>>vec[i];
-        if(vec[i]==0) x++;
-        sum+=vec[i];
-        
-        a.pb(sum);
-     }
-     if(x==vec.size()){
-        for(int i = 0 ; i< n ; i++){
-            cout<<vec[i]<<" ";
-        }
-        cout<<endl;
-        return;
-     }
-     ll int h=0;
-     ll int k=0;
-     for(int i=1 ; i<n ; i++){
-         h=a[i-1]+vec[i];
-         k=a[i-1]-vec[i];
-         if(h>=0 && k>=0 && h!=k){
-            flag=false;
-            break;
-         }
-
-     }
-     
-     if(flag){
-        for(int i=0 ; i<n ; i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
-     }
-        else{
-            cout<<-1<<endl;
-        }
-     }
-     
-     
-
+   string s;
+   cin>>s;
+   ll int mx=0;
+   ll int count=0;
+   for(int i=0 ; i<s.length() ; i++){
+       if(s[i]=='a' ||  s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u' ){
+          count++;
+          mx=max(mx,count);
+       }
+       else{
+        count=0;
+       }
+   }
+//    cout<<mx<<endl;
+   if(mx>2) cout<<"Happy"<<endl; 
+   else cout<<"Sad"<<endl; 
+}
     
 
 int main() {

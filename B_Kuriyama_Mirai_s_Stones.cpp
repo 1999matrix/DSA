@@ -63,65 +63,51 @@ return (a*b)/(gcd(a,b));
 
 //=======================
 
-void solve(){
-    ll int n ;
-    cin>>n;
-     vector<ll int>  vec(n);
-     vector<ll int>  a;
-     vector<ll int>  b;
-     bool flag=true;
-     ll int x=0;
-     ll int sum=0;
-     ll int diff=0;
-     for(int i= 0 ; i < n ; i++){
-        cin>>vec[i];
-        if(vec[i]==0) x++;
-        sum+=vec[i];
-        
-        a.pb(sum);
-     }
-     if(x==vec.size()){
-        for(int i = 0 ; i< n ; i++){
-            cout<<vec[i]<<" ";
-        }
-        cout<<endl;
-        return;
-     }
-     ll int h=0;
-     ll int k=0;
-     for(int i=1 ; i<n ; i++){
-         h=a[i-1]+vec[i];
-         k=a[i-1]-vec[i];
-         if(h>=0 && k>=0 && h!=k){
-            flag=false;
-            break;
-         }
-
-     }
-     
-     if(flag){
-        for(int i=0 ; i<n ; i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
-     }
-        else{
-            cout<<-1<<endl;
-        }
-     }
-     
-     
 
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
+    ll int n;
+    cin>>n;
+    ll int arr[n];
+    ll int prefix[n];
+    ll int sortpre[n];
+    ll int sum=0;
+    for(int i=0 ; i< n ; i++){
+        cin>>arr[i];
+        sum+=arr[i];
+        prefix[i] = sum;
 
+    }
     int t = 1;
     cin >> t;
+    sort(arr,arr+n);
+    sum=0;
+    for(int i=0 ; i<n ; i++){
+        sum+=arr[i];
+        sortpre[i]=sum;
+    }
+    // for(int i=0 ; i< n ;i++){
+    //     cout<<prefix[i]<<" ";
+    // }
+    // cout<<endl;
+    // for(int i=0 ; i< n ;i++){
+    //     cout<<sortpre[i]<<" ";
+    // }
+    //  cout<<endl;
     while(t--) {
      
-        solve();
+        ll int l,r,a;
+        cin>>a>>l>>r;
+        if(a==1){
+            if(l==1) cout<<prefix[r-1]<<endl;
+            else cout<<prefix[r-1]-prefix[l-2]<<endl;
+        }
+        else{
+         if(l==1)cout<<sortpre[r-1]<<endl;
+         else cout<<sortpre[r-1]-sortpre[l-2]<<endl;
+        }
     }
 
     return 0;
