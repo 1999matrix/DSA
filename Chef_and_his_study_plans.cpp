@@ -61,79 +61,55 @@ ll int lcm(ll int a, ll int b){
 return (a*b)/(gcd(a,b));
 }
 
-bool is_palindrome(vector<ll int> a){
-    ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] != a[n-1-i]) return false;
-    }
-    return true;
-}
-bool fun(vector<ll int> a){
-     ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] > a[n-1-i]) return false;
-    }
-}
-
 //=======================
-
+bool cmp (vector<ll int> a , vector<ll int> b){
+    return a[1]<=b[1];
+}
 void solve(){
-    ll int n;
-    cin>>n;
-    if(n==1) {
-     cout<<0<<endl;
-     return;
-    }
-    vector<ll int> a(n);
-    for(int i=0;i < n ;i++){
-        cin>>a[i];
-    }
+    ll int n,q;
+    cin>>n>>q;
+    
+    
 
-   bool f= is_palindrome(a);
-    if(f) {
-        cout<<0<<endl;
-        return;
+    vector<vector<ll int>>a(n,vector<ll int>(2,0));
+    vector<vector<ll int>>b(n,vector<ll int>(2,0));
+    for(int i=0 ; i< n ; i++){
+       for(int j=0 ; j<2 ; j++){
+        cin>>a[i][j];
+       }
     }
-    ll int i=0 ;
-    ll int j=n-1 ;
-    ll int mx=0;
-    vector<ll int>b;
-    while(j>i){
-        if(a[j]-a[i]<0){
-            cout<<-1<<endl;
-            return;
-        }
-     b.pb(a[j]-a[i]);
-     i++;
-     j--;
-
-    }
-    vector<ll int>c;
-    c=b;
-    sort(c.begin() , c.end() , greater<int>());
-    if(c!=b) {
-        cout<<-1<<endl;
-        return;
-    }
-    // for(int k=0 ; k<b.size() ; i++){
-    //     if(b[k]<0) {
-    //         cout<<-1<<endl;
-    //         return;
+    sort(a.begin() , a.end() ,cmp);
+    // for(int i=0 ; i < n ; i++){
+    //     for(int j=0 ; j<2 ; j++){
+    //         cout<<a[i][j]<<" ";
     //     }
+    //     cout<<endl;
     // }
-    cout<<b[0]<<endl;
+    
+    while(q--){
+     ll int x,y;
+     ll int z=0;
+     ll int cnt=0;
+     cin>>x>>y;
+     ll int x1=0,y1=0;
+      for(int i=0 ; i< n ; i++){
+         if(x<= a[i][0] && a[i][1]<=y && a[i][0]>=y1){
+            cnt++;
+            y1 = a[i][1];
+         }
+      }
+      cout<<cnt<<endl;
+    }
 }
     
 
 int main() {
     ios_base::sync_with_stdio(0), cin.tie(0);
 
-    int t = 1;
-    cin >> t;
-    while(t--) {
+   
      
         solve();
-    }
+    
 
     return 0;
 }

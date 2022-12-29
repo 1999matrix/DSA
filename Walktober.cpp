@@ -61,67 +61,31 @@ ll int lcm(ll int a, ll int b){
 return (a*b)/(gcd(a,b));
 }
 
-bool is_palindrome(vector<ll int> a){
-    ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] != a[n-1-i]) return false;
-    }
-    return true;
-}
-bool fun(vector<ll int> a){
-     ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] > a[n-1-i]) return false;
-    }
-}
-
 //=======================
 
-void solve(){
-    ll int n;
-    cin>>n;
-    if(n==1) {
-     cout<<0<<endl;
-     return;
-    }
-    vector<ll int> a(n);
-    for(int i=0;i < n ;i++){
-        cin>>a[i];
-    }
+void solve(ll int t){
+    ll int n,m,p;
+    cin>>n>>m>>p;
+    vector<vector<int>> a( n , vector<int> (m)); 
+     for(int i=0 ; i<n ; i++){
+        for(int j=0 ; j<m ; j++){
+            cin>>a[i][j];
 
-   bool f= is_palindrome(a);
-    if(f) {
-        cout<<0<<endl;
-        return;
-    }
-    ll int i=0 ;
-    ll int j=n-1 ;
-    ll int mx=0;
-    vector<ll int>b;
-    while(j>i){
-        if(a[j]-a[i]<0){
-            cout<<-1<<endl;
-            return;
         }
-     b.pb(a[j]-a[i]);
-     i++;
-     j--;
+     }
+     ll int ans =0 ;
+     for(int j=0 ; j<m ; j++){
+     ll int mx =0;
+        ll int g = a[p-1][j];
+        for(int i=0 ; i<n ; i++){
+            ll int f=a[i][j];
+           mx = max(mx , f); 
+        }
+        if(mx > g) ans+=abs(mx-g);
+     }
+     cout<<"Case #"<<t<<": "<<ans<<endl;
 
-    }
-    vector<ll int>c;
-    c=b;
-    sort(c.begin() , c.end() , greater<int>());
-    if(c!=b) {
-        cout<<-1<<endl;
-        return;
-    }
-    // for(int k=0 ; k<b.size() ; i++){
-    //     if(b[k]<0) {
-    //         cout<<-1<<endl;
-    //         return;
-    //     }
-    // }
-    cout<<b[0]<<endl;
+    
 }
     
 
@@ -130,9 +94,10 @@ int main() {
 
     int t = 1;
     cin >> t;
+    ll int x=0;
     while(t--) {
-     
-        solve();
+         x++;
+        solve(x);
     }
 
     return 0;

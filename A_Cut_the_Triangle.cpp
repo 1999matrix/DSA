@@ -61,67 +61,56 @@ ll int lcm(ll int a, ll int b){
 return (a*b)/(gcd(a,b));
 }
 
-bool is_palindrome(vector<ll int> a){
-    ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] != a[n-1-i]) return false;
-    }
-    return true;
-}
-bool fun(vector<ll int> a){
-     ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] > a[n-1-i]) return false;
-    }
-}
-
 //=======================
 
+
+bool checkRightAngled(int X1, int Y1,
+                      int X2, int Y2,
+                      int X3, int Y3)
+{
+    // Calculate the sides
+    int A = (int)pow((X2 - X1), 2)
+            + (int)pow((Y2 - Y1), 2);
+ 
+    int B = (int)pow((X3 - X2), 2)
+            + (int)pow((Y3 - Y2), 2);
+ 
+    int C = (int)pow((X3 - X1), 2)
+            + (int)pow((Y3 - Y1), 2);
+ 
+    // Check Pythagoras Formula
+    if ((A > 0 and B > 0 and C > 0)
+        and (A == (B + C) or B == (A + C)
+             or C == (A + B)))
+       
+        return true;
+ 
+    else
+       
+        return false;
+}
+
 void solve(){
-    ll int n;
-    cin>>n;
-    if(n==1) {
-     cout<<0<<endl;
-     return;
-    }
-    vector<ll int> a(n);
-    for(int i=0;i < n ;i++){
-        cin>>a[i];
-    }
-
-   bool f= is_palindrome(a);
-    if(f) {
-        cout<<0<<endl;
-        return;
-    }
-    ll int i=0 ;
-    ll int j=n-1 ;
-    ll int mx=0;
-    vector<ll int>b;
-    while(j>i){
-        if(a[j]-a[i]<0){
-            cout<<-1<<endl;
-            return;
+    ll int  a,b,c,d,e,f;
+    
+   
+    cin>>a>>b;
+    cin>>c>>d;
+    cin>>e>>f;
+    if(a==c||c==e || e==a){
+        if(b==d||d==f||f==b){
+            cout<<"NO"<<endl;
         }
-     b.pb(a[j]-a[i]);
-     i++;
-     j--;
-
+        else{
+            cout<<"YES"<<endl;
+        }
     }
-    vector<ll int>c;
-    c=b;
-    sort(c.begin() , c.end() , greater<int>());
-    if(c!=b) {
-        cout<<-1<<endl;
-        return;
+    else{
+        cout<<"YES"<<endl;
     }
-    // for(int k=0 ; k<b.size() ; i++){
-    //     if(b[k]<0) {
-    //         cout<<-1<<endl;
-    //         return;
-    //     }
-    // }
-    cout<<b[0]<<endl;
+//     if(a==c || c==e || e==f) f=true;
+//   if(b==d || d==f || f==b)
+    
 }
     
 
@@ -137,3 +126,5 @@ int main() {
 
     return 0;
 }
+
+

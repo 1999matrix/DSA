@@ -11,6 +11,7 @@ using namespace std;
 #define PI 3.1415926535897932384626
 #define eb emplace_back
 #define pb push_back
+#define ub upper_bound
 //=======================
 const int MOD = 1'000'000'007;
 const int N = 2e6+13, M = N;
@@ -61,67 +62,69 @@ ll int lcm(ll int a, ll int b){
 return (a*b)/(gcd(a,b));
 }
 
-bool is_palindrome(vector<ll int> a){
-    ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] != a[n-1-i]) return false;
-    }
-    return true;
-}
-bool fun(vector<ll int> a){
-     ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] > a[n-1-i]) return false;
-    }
-}
-
 //=======================
 
-void solve(){
-    ll int n;
-    cin>>n;
-    if(n==1) {
-     cout<<0<<endl;
-     return;
+void shashwat(ll int t){
+   ll int n = 0, m = 0, k = 0 ;
+  int rs, rh;
+  cin >> rs >> rh;
+  cin >> n;
+  vector<ll int> a;
+  vector<ll int> b;
+  while (n--) {
+    int xi, yi;
+    cin >> xi >> yi;
+    if (xi*xi + yi*yi <= (rs+rh)*(rs+rh)) {
+      a.pb(xi * xi + yi * yi);
     }
-    vector<ll int> a(n);
-    for(int i=0;i < n ;i++){
-        cin>>a[i];
-    }
+  }
+  sort(a.begin() , a.end());
 
-   bool f= is_palindrome(a);
-    if(f) {
-        cout<<0<<endl;
-        return;
-    }
-    ll int i=0 ;
-    ll int j=n-1 ;
-    ll int mx=0;
-    vector<ll int>b;
-    while(j>i){
-        if(a[j]-a[i]<0){
-            cout<<-1<<endl;
-            return;
-        }
-     b.pb(a[j]-a[i]);
-     i++;
-     j--;
 
+priority_queue<ll int> pq;
+  for(int i= 0 ; i < a.size() ; i++){
+    pq.push(i);
+  }
+  cin >> m;
+  while (m--) {
+    int wi, zi;
+    cin >> wi >> zi;
+    if (wi * wi + zi * zi <= (rs+rh) * (rs+rh)) {
+      b.pb(wi * wi + zi * zi);
     }
-    vector<ll int>c;
-    c=b;
-    sort(c.begin() , c.end() , greater<int>());
-    if(c!=b) {
-        cout<<-1<<endl;
-        return;
+  }
+  
+  ll int x =a.size();
+  ll int y=b.size();
+  sort(b.begin() , b.end());
+  priority_queue<ll int> s;
+  for(int i= 0 ; i < 10 ; i++){
+    s.push(i);
+  }
+  ll int c = s.top();
+  ll int res=c;
+  s.pop();
+  c = s.top();
+  res+=c;
+ 
+  if (a.size() && b.size()) {
+    if (a[0]<b[0]) {
+      int x = ub(all(a), b[0]) - a.begin();
+      c=0;
+      x=x+c;
+      cout <<"Case #"<<t<<": "<< x << " " << 0<<endl;
+    } else {
+      int x = ub(all(b), a[0]) - b.begin();
+      c=0;
+      x=x+c;
+      cout<<"Case #"<<t<<": " << 0 << " " << x<<endl;
     }
-    // for(int k=0 ; k<b.size() ; i++){
-    //     if(b[k]<0) {
-    //         cout<<-1<<endl;
-    //         return;
-    //     }
-    // }
-    cout<<b[0]<<endl;
+  } else {
+    if (x)
+      cout <<"Case #"<<t<<": "<<x<< " " << 0 <<endl;
+    else
+      cout<<"Case #"<<t<<": " << 0 << " " << y <<endl;
+  }
 }
     
 
@@ -130,9 +133,10 @@ int main() {
 
     int t = 1;
     cin >> t;
+    ll int x=0;
     while(t--) {
-     
-        solve();
+       x++;
+        shashwat(x);
     }
 
     return 0;

@@ -61,67 +61,46 @@ ll int lcm(ll int a, ll int b){
 return (a*b)/(gcd(a,b));
 }
 
-bool is_palindrome(vector<ll int> a){
-    ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] != a[n-1-i]) return false;
-    }
-    return true;
-}
-bool fun(vector<ll int> a){
-     ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] > a[n-1-i]) return false;
-    }
-}
-
 //=======================
-
+// bool cmp(pair<ll int , ll int> a , pair<ll int , ll int>b){
+//     return a.second >= b.second;
+// }
 void solve(){
-    ll int n;
-    cin>>n;
-    if(n==1) {
-     cout<<0<<endl;
-     return;
-    }
-    vector<ll int> a(n);
-    for(int i=0;i < n ;i++){
-        cin>>a[i];
-    }
+    ll int n,w;
+    cin>>n>>w;
+    vector<ll int> c(n);
+    vector<ll int> p(n);
+    // vector<pair<ll int , ll int>> a;
+    priority_queue<pair<ll int , pair<ll int, ll int>>>pq;
 
-   bool f= is_palindrome(a);
-    if(f) {
-        cout<<0<<endl;
-        return;
+    vector<ll int> t(n);
+    for(int i=0 ; i< n ;i++){
+        cin>>c[i];
     }
-    ll int i=0 ;
-    ll int j=n-1 ;
-    ll int mx=0;
-    vector<ll int>b;
-    while(j>i){
-        if(a[j]-a[i]<0){
-            cout<<-1<<endl;
-            return;
-        }
-     b.pb(a[j]-a[i]);
-     i++;
-     j--;
-
+   
+    for(int i=0 ; i< n ;i++){
+        cin>>p[i];
     }
-    vector<ll int>c;
-    c=b;
-    sort(c.begin() , c.end() , greater<int>());
-    if(c!=b) {
-        cout<<-1<<endl;
-        return;
+   
+    for(int i=0 ; i< n ;i++){
+        cin>>t[i];
     }
-    // for(int k=0 ; k<b.size() ; i++){
-    //     if(b[k]<0) {
-    //         cout<<-1<<endl;
-    //         return;
-    //     }
-    // }
-    cout<<b[0]<<endl;
+    for(int i=0 ; i< n ;i++){
+        ll int x = p[i]/c[i];
+        pq.push({x,{t[i],p[i]*c[i]}});
+    }
+   
+   ll int sum=0;
+   while(w>0){
+    ll int x = pq.top().second.first;
+    // deb(x);
+    if(w-x >=0){
+        sum+=pq.top().second.second ;
+    }  
+        w=w-x;
+    pq.pop();
+   }
+   cout<<sum<<endl;
 }
     
 

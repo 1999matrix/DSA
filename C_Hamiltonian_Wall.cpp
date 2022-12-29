@@ -61,67 +61,45 @@ ll int lcm(ll int a, ll int b){
 return (a*b)/(gcd(a,b));
 }
 
-bool is_palindrome(vector<ll int> a){
-    ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] != a[n-1-i]) return false;
-    }
-    return true;
-}
-bool fun(vector<ll int> a){
-     ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] > a[n-1-i]) return false;
-    }
-}
-
 //=======================
+void df(vector<vector<char>>a, int i , int j , int x ,int &y , bool &f , int m){
+     if(a[i][j]=='B'){
+       y++;
+     }
+    if(y==x){
+        f=true;
+        return;
+    }
+    if(i>=2 || j>=m || i<0 || j<0) return;
+        df(a, i+1 , j , x ,y ,f,m);
+        df(a, i-1 , j , x ,y ,f,m);
+       df(a, i , j+1 , x ,y ,f,m);
+        df(a, i , j-1 , x ,y ,f,m);
 
+}
 void solve(){
-    ll int n;
-    cin>>n;
-    if(n==1) {
-     cout<<0<<endl;
-     return;
+    ll int m;
+    cin>>m;
+    ll int x=0;
+    bool f=false;
+    int y=0;
+    vector<vector<char>>a(2 , vector<char> (m)); 
+    for(int i=0 ; i < 2 ; i++){
+         for(int j=0; j<m ; j++){
+            cin>>a[i][j];
+            if(a[i][j]=='B') x++;
+         }
     }
-    vector<ll int> a(n);
-    for(int i=0;i < n ;i++){
-        cin>>a[i];
+    for(int i=0 ; i < 2 ; i++){
+         for(int j=0; j<m ; j++){
+         df(a, i , j , x , y ,f ,m);
+          if(f){
+            cout<<"YES"<<endl;
+          }
+         }
     }
+    cout<<"NO"<<endl;
 
-   bool f= is_palindrome(a);
-    if(f) {
-        cout<<0<<endl;
-        return;
-    }
-    ll int i=0 ;
-    ll int j=n-1 ;
-    ll int mx=0;
-    vector<ll int>b;
-    while(j>i){
-        if(a[j]-a[i]<0){
-            cout<<-1<<endl;
-            return;
-        }
-     b.pb(a[j]-a[i]);
-     i++;
-     j--;
-
-    }
-    vector<ll int>c;
-    c=b;
-    sort(c.begin() , c.end() , greater<int>());
-    if(c!=b) {
-        cout<<-1<<endl;
-        return;
-    }
-    // for(int k=0 ; k<b.size() ; i++){
-    //     if(b[k]<0) {
-    //         cout<<-1<<endl;
-    //         return;
-    //     }
-    // }
-    cout<<b[0]<<endl;
 }
     
 

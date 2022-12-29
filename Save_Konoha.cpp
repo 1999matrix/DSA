@@ -61,67 +61,40 @@ ll int lcm(ll int a, ll int b){
 return (a*b)/(gcd(a,b));
 }
 
-bool is_palindrome(vector<ll int> a){
-    ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] != a[n-1-i]) return false;
-    }
-    return true;
-}
-bool fun(vector<ll int> a){
-     ll int n=a.size();
-    for(int i=0 ; i<=n/2 ;i++){
-      if(a[i] > a[n-1-i]) return false;
-    }
-}
-
 //=======================
 
 void solve(){
-    ll int n;
-    cin>>n;
-    if(n==1) {
-     cout<<0<<endl;
-     return;
-    }
-    vector<ll int> a(n);
-    for(int i=0;i < n ;i++){
-        cin>>a[i];
-    }
-
-   bool f= is_palindrome(a);
-    if(f) {
-        cout<<0<<endl;
-        return;
-    }
-    ll int i=0 ;
-    ll int j=n-1 ;
-    ll int mx=0;
-    vector<ll int>b;
-    while(j>i){
-        if(a[j]-a[i]<0){
-            cout<<-1<<endl;
-            return;
-        }
-     b.pb(a[j]-a[i]);
-     i++;
-     j--;
+    ll int n,z;
+    cin>>n>>z;
+    
+    priority_queue<ll int> pq;
+    
+    for(int i=0 ; i < n ; i++){
+        ll int a;
+        cin>>a;
+        pq.push(a);
 
     }
-    vector<ll int>c;
-    c=b;
-    sort(c.begin() , c.end() , greater<int>());
-    if(c!=b) {
-        cout<<-1<<endl;
+    ll int cnt=0;
+    // sort(a.begin() , a.end());
+    // int k=n-1;
+  
+    while(z>0){
+        // deb(pq.top());
+       z=z-pq.top();
+       ll int b=0;
+       b=(pq.top())/2;
+       pq.pop();
+      if(b!=0) pq.push(b);
+       
+       if(pq.empty() && z>0) {
+        cout<<"Evacuate"<<endl;
         return;
+       }
+       cnt++;
+
     }
-    // for(int k=0 ; k<b.size() ; i++){
-    //     if(b[k]<0) {
-    //         cout<<-1<<endl;
-    //         return;
-    //     }
-    // }
-    cout<<b[0]<<endl;
+    cout<<cnt<<endl;
 }
     
 
